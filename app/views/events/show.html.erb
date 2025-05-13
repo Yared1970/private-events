@@ -1,0 +1,18 @@
+
+<h1><%= @event.title %></h1>
+<p><strong>Date:</strong> <%= @event.date %></p>
+<p><strong>Created by:</strong> <%= @event.creator.email %></p>
+
+<h2>Attendees</h2>
+<% if @event.attendees.any? %>
+  <ul>
+    <% @event.attendees.each do |attendee| %>
+      <li><%= link_to attendee.email, user_path(attendee) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No one is attending this event yet.</p>
+<% end %>
+
+<%= link_to "Back to Events", events_path %>
+

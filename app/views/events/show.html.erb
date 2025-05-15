@@ -1,7 +1,16 @@
 
 <h1><%= @event.title %></h1>
+
 <p><strong>Date:</strong> <%= @event.date %></p>
 <p><strong>Created by:</strong> <%= @event.creator.email %></p>
+
+<% unless @event.attendees.include?(current_user) %>
+  <%= button_to "Attend this Event", event_attendances_path(@event), method: :post %>
+<% else %>
+  <p>You are attending this event.</p>
+<% end %>
+
+<hr>
 
 <h2>Attendees</h2>
 <% if @event.attendees.any? %>
@@ -15,4 +24,3 @@
 <% end %>
 
 <%= link_to "Back to Events", events_path %>
-
